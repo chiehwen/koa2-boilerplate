@@ -9,9 +9,13 @@ const RoutesIndex = require('./routes/api/index');
 
 app.use(bodyParser());
 
+const passport = require('koa-passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
 const port = process.env.PORT || 7001;
 const MONGODB_HOST = process.env.MONGODB_HOST || "mongodb://127.0.0.1:27017/api-server"
-mongoose.connect(MONGODB_HOST, { useNewUrlParser: true })
+mongoose.connect(MONGODB_HOST, { useCreateIndex: true, useNewUrlParser: true })
 	.then(() => {
 		console.log("MongoDB Connected...");
 	})
