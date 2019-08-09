@@ -1,0 +1,33 @@
+{
+  "name": "koa2-boilerplate",
+  "version": "1.0.0",
+  "description": "My personal boilerplate of koa 2.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node_modules/.bin/nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiehwen/koa2-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "CHIEH-WEN YANG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiehwen/koa2-boilerplate/issues"
+  },
+  "homepage": "https://github.com/chiehwen/koa2-boilerplate#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "gravatar": "^1.8.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.6.9",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
