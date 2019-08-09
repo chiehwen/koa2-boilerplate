@@ -10,7 +10,7 @@ const crypt = {
 	// }
 	saltPassword(password) {
 		const salt = bcrypt.genSaltSync(10);
-		const hash = bcrypt.hash(password, salt);
+		const hash = bcrypt.hashSync(password, salt);
 		return hash;
 	}
 };

@@ -69,10 +69,12 @@ router.post('/register', async ctx => {
  * @access Public
  */
 router.post('/login', async ctx => {
-	const findResult = await User.findOne({ email: ctx.request.body.email });
+	const findResult = await User.find({ email: ctx.request.body.email });
+	const user = findResult[0];
+	const password = ctx.request.body.password;	
 
 	// 判斷用戶是否存在
-	if (findResult.length === 0) {
+	if (findResult.length == 0) {
 		ctx.status = 404;
 		ctx.body = { email: 'User not exist.'}
 	} else {
@@ -80,11 +82,11 @@ router.post('/login', async ctx => {
 		const result = await bcrypt.compareSync(password, user.password);
 
 		if (result) {
-			const payload = { id: user.id, name: user.name, avatar: user.avatar };
-			const token = jwt.sign(payload, "secret", { expiresIn });
+			// const payload = { id: user.id, name: user.name, avatar: user.avatar };
+			// const token = jwt.sign(payload, "secret", { expiresIn });
 
 			ctx.status = 200;
-			ctx.body = { success: true, token: "Bearer " + token };
+			ctx.body = { success: true};
 		} else {
 			ctx.status = 400;
 			ctx.body = { password: "Wrong Password!" }
