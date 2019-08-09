@@ -82,11 +82,14 @@ router.post('/login', async ctx => {
 		const result = await bcrypt.compareSync(password, user.password);
 
 		if (result) {
-			// const payload = { id: user.id, name: user.name, avatar: user.avatar };
-			// const token = jwt.sign(payload, "secret", { expiresIn });
+			const payload = {
+				id: user.id,
+				username: user.username,
+				avatar: user.avatar };
+			const token = jwt.sign(payload, "secret", { expiresIn: 3600 });
 
 			ctx.status = 200;
-			ctx.body = { success: true};
+			ctx.body = { success: true, token: "Bearer " + token };
 		} else {
 			ctx.status = 400;
 			ctx.body = { password: "Wrong Password!" }
