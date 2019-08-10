@@ -6,6 +6,7 @@ const crypt = require('../../utils/crypt');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
+const passport = require('koa-passport');
 
 /**
  * @route POST api/users/register
@@ -98,11 +99,22 @@ router.post('/login', async ctx => {
 });
 
 /**
- * @route POST api/user/currentUser
- * @desc
+ * @route POST api/user/getCurrentUser
+ * @desc User info
  * @access Private
  */
-// router.post("/current",  )
+router.post(
+	'/getCurrentUser',
+	passport.authenticate('jwt', { session: false }),
+	async ctx => {
+		ctx.body = {
+			id: ctx.state.user.id,
+			username: ctx.state.user.username,
+			email: ctx.state.user.email,
+			avatar: ctx.state.user.avatar
+		};
+	}
+);
 
 /**
  * @route POST api/users/forgotPassword
