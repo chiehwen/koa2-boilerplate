@@ -5,13 +5,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	_id: {
-		type: Buffer,
-		default: function() {
-			return mongoose.Types.Buffer(uuidv4()).toObject(4);
-        },
-		required: true
-	},
+	// _id: {
+	// 	type: Buffer,
+	// 	default: function() {
+	// 		return mongoose.Types.Buffer(uuidv4()).toObject(4);
+    //     },
+	// 	required: true
+	// },
 	username: {
 		type: String
 	},
@@ -62,4 +62,4 @@ const UserSchema = new Schema({
 // 	return await bcrypt.compare(password, this.password);
 // };
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = User = mongoose.model('users', UserSchema);

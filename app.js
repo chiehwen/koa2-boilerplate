@@ -10,8 +10,10 @@ app.use(bodyParser());
 const passport = require('koa-passport');
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport.js')(passport);
 
-require('./config/passport')(passport);
+const logger = require('koa-logger')
+
 
 const port = process.env.PORT || 7001;
 const MONGODB_HOST = process.env.MONGODB_HOST || "mongodb://127.0.0.1:27017/api-server"

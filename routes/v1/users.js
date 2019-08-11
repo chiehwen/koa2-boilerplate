@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('koa-passport');
 
 /**
- * @route POST api/users/register
+ * @route POST v1/users/register
  * @desc To handle new users registering
  * @access Public
  */
@@ -65,7 +65,7 @@ router.post('/register', async ctx => {
 });
 
 /**
- * @route POST api/users/login
+ * @route POST v1/users/login
  * @desc To handle returning users logging in
  * @access Public
  */
@@ -81,16 +81,16 @@ router.post('/login', async ctx => {
 	} else {
 		// 驗證密碼
 		const result = await bcrypt.compareSync(password, user.password);
-
+		
 		if (result) {
 			const payload = {
 				id: user.id,
 				username: user.username,
-				avatar: user.avatar };
+				avatar: user.avatar
+			};
 			const token = jwt.sign(payload, "secret", { expiresIn: 3600 });
-
 			ctx.status = 200;
-			ctx.body = { success: true, token: "Bearer " + token };
+			ctx.body = { success: true, token: 'Bearer ' + token };
 		} else {
 			ctx.status = 400;
 			ctx.body = { password: "Wrong Password!" }
@@ -99,7 +99,7 @@ router.post('/login', async ctx => {
 });
 
 /**
- * @route POST api/user/getCurrentUser
+ * @route POST v1/user/getCurrentUser
  * @desc User info
  * @access Private
  */
