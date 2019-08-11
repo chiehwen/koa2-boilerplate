@@ -1,0 +1,70 @@
+version: '3'
+services:
+  koa2-boilerplate:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args:
+    #     - env=value
+    image: koa2-boilerplate/api-server:latest
+    # entrypoint:
+    #   - "/bin/sh"
+    #   - "-ecx"
+    #   - >
+    #       ./node_modules/.bin/sequelize db:create --charset utf8mb4 --collate utf8mb4_unicode_520_ci && ./node_modules/.bin/sequelize db:migrate
+    environment:
+      - NODE_ENV=development
+      - EGG_SERVER_ENV=local
+      - DATABASE_HOST=mysql
+      - DATABASE_USERNAME=koa2-boilerplate_admin
+      - DATABASE_PASSWORD=password
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=koa2-boilerplate
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASS=etGaq66FITUlyPzOhXgdp3ZgJT1BNLv53TCxRxQmpaI9yVghT1hYa5V+8MKNtHGf34P9CYGmTg1GelvM
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - docker_koa2-boilerplate
+    ports:
+      - 7001:7001
+    volumes:
+     - .:/usr/src/app
+    command: ["npm", "run", "migrate:up"]
+    # healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost:7001/"]
+    #  interval: 10s
+    #  timeout: 5s
+    #  retries: 5
+
+  redis:
+    image: redis:3.2-alpine
+    command: redis-server --appendonly yes --requirepass etGaq66FITUlyPzOhXgdp3ZgJT1BNLv53TCxRxQmpaI9yVghT1hYa5V+8MKNtHGf34P9CYGmTg1GelvM
+    volumes:
+      - egg-redis:/data
+    networks:
+      - docker_koa2-boilerplate
+    ports:
+      - 6379:6379
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=koa2-boilerplate
+      - MYSQL_USER=koa2-boilerplate_admin
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+    networks:
+      - docker_koa2-boilerplate
+    ports:
+     - 3306:3306
+
+volumes:
+  egg-redis:
+
+networks:
+  docker_koa2-boilerplate:
+    driver: bridge
