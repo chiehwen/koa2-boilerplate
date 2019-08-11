@@ -4,7 +4,7 @@ const router = new Router();
 const home = require('./home');
 const users = require('./users');
 
-router.use('/api/', home);
-router.use('/api/users', users);
+router.use('/', home);
+router.use('/users', users);
 
-module.exports = router;
+module.exports = router.routes();

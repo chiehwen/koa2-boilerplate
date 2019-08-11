@@ -20,6 +20,7 @@
   "homepage": "https://github.com/chiehwen/koa2-boilerplate#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.0.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
