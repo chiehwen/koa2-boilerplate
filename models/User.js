@@ -35,6 +35,9 @@ const UserSchema = new Schema({
 	mobile: {
 		type: String
 	},
+	isOnline: {
+		type: Boolean
+	},
 	created_at: {
 		type: Date,
 		default: Date.now

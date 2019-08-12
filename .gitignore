@@ -40,3 +40,5 @@ jspm_packages
 .env.local
 .env.staging
 .env.prod
+
+.DS_Store

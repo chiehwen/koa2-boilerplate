@@ -72,7 +72,7 @@ router.post('/register', async ctx => {
 router.post('/login', async ctx => {
 	const findResult = await User.find({ email: ctx.request.body.email });
 	const user = findResult[0];
-	const password = ctx.request.body.password;	
+	const password = ctx.request.body.password;
 
 	// 判斷用戶是否存在
 	if (findResult.length == 0) {
@@ -81,7 +81,7 @@ router.post('/login', async ctx => {
 	} else {
 		// 驗證密碼
 		const result = await bcrypt.compareSync(password, user.password);
-		
+
 		if (result) {
 			const payload = {
 				id: user.id,
